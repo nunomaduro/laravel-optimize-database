@@ -5,14 +5,15 @@ on: ['push', 'pull_request']
 jobs:
   ci:
     runs-on: ${{ matrix.os }}
+
     strategy:
       fail-fast: true
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        php: ['8.2', '8.3']
-        dependency-version: [prefer-lowest, prefer-stable]
+        os: [ubuntu-latest]
+        php: [8.2]
+        dependency-version: [prefer-stable]
 
-    name: Tests P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
+    name: Formats P${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }}
 
     steps:
 
@@ -24,7 +25,7 @@ jobs:
       with:
         php-version: ${{ matrix.php }}
         extensions: dom, mbstring, zip
-        coverage: none
+        coverage: pcov
 
     - name: Get Composer cache directory
       id: composer-cache
@@ -41,5 +42,12 @@ jobs:
     - name: Install Composer dependencies
       run: composer update --${{ matrix.dependency-version }} --no-interaction --prefer-dist
 
-    - name: Tests
-      run: composer test
+    - name: Coding Refactors
+      run: composer test:refacto
+
+    - name: Coding Style Checks
+      run: composer test:lint
+
+    - name: Type Checks
+      run: composer test:types
+
