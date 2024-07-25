@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "NunoMaduro\\LaravelSonicLite\\": "src/"
+            "NunoMaduro\\LaravelOptimizeDatabase\\": "src/"
         }
     },
     "autoload-dev": {
@@ -36,6 +36,13 @@
         "preferred-install": "dist",
         "allow-plugins": {
             "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "NunoMaduro\\LaravelOptimizeDatabase\\LaravelOptimizeDatabaseServiceProvider"
+            ]
         }
     },
     "scripts": {
