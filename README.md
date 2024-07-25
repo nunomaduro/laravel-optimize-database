@@ -40,6 +40,7 @@ PRAGMA synchronous = NORMAL;
 PRAGMA page_size = 32768;
 PRAGMA cache_size = -20000;
 PRAGMA auto_vacuum = incremental;
+PRAGMA foreign_keys = ON;
 // etc...
 ```
 
