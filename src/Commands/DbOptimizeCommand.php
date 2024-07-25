@@ -38,6 +38,6 @@ final class DbOptimizeCommand extends Command
         }
 
         $this->components->warn('Please validate the migration before running it in production. It may contain settings that are not compatible with your application.');
-        $this->components->info('Once validated, you may run `php artisan migrate` to apply the migration.');
+        $this->components->info('Once validated, you may run [php artisan migrate] to apply the migration.');
     }
 }

@@ -35,7 +35,10 @@ This will publish a migration that apply defaults like so:
 ```SQL
 PRAGMA journal_mode = WAL;
 PRAGMA synchronous = NORMAL;
-... etc
+PRAGMA page_size = 32768;
+PRAGMA cache_size = -20000;
+PRAGMA auto_vacuum = incremental;
+// etc...
 ```
 
 Next, you simply need to run the migration:
