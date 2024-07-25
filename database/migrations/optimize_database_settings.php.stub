@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 return new class extends Migration
 {
@@ -12,11 +12,29 @@ return new class extends Migration
     public function up(): void
     {
         if (config('database.default') === 'sqlite') {
-            DB::statement('PRAGMA journal_mode = WAL');
-            DB::statement('PRAGMA synchronous = NORMAL');
-            DB::statement('PRAGMA page_size = 32768;');
-            DB::statement('PRAGMA cache_size = -20000;');
-            DB::statement('PRAGMA auto_vacuum = incremental;');
+            try {
+                $this->setPragmaStatements();
+            } catch (\Exception $e) {
+                Log::error('Failed to set SQLite PRAGMA statements: ' . $e->getMessage());
+            }
+        }
+    }
+
+    /**
+     * Set SQLite PRAGMA statements.
+     */
+    protected function setPragmaStatements(): void
+    {
+        $pragmas = [
+            'PRAGMA journal_mode = WAL',
+            'PRAGMA synchronous = NORMAL',
+            'PRAGMA page_size = 32768',
+            'PRAGMA cache_size = -20000',
+            'PRAGMA auto_vacuum = incremental',
+        ];
+
+        foreach ($pragmas as $pragma) {
+            DB::statement($pragma);
         }
     }
 };
