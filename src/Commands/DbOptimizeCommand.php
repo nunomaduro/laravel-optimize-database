@@ -60,5 +60,6 @@ final class DbOptimizeCommand extends Command
         ]);
 
         $this->components->info('While [Runtime] settings are applied automatically, [Migration] settings will only be applied after running [php artisan migrate].');
+        $this->components->warn('Please make sure to backup your database before running the migrations.');
     }
 }
