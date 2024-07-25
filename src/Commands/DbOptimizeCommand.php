@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace NunoMaduro\LaravelOptimizeDatabase;
+namespace NunoMaduro\LaravelOptimizeDatabase\Commands;
 
 use Illuminate\Console\Command;
+use NunoMaduro\LaravelOptimizeDatabase\LaravelOptimizeDatabaseServiceProvider;
 
 /**
  * @internal
