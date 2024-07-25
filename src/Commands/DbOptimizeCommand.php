@@ -7,6 +7,7 @@ namespace NunoMaduro\LaravelOptimizeDatabase\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use NunoMaduro\LaravelOptimizeDatabase\LaravelOptimizeDatabaseServiceProvider;
+
 use function Laravel\Prompts\table;
 
 /**
@@ -33,7 +34,6 @@ final class DbOptimizeCommand extends Command
             '--provider' => LaravelOptimizeDatabaseServiceProvider::class,
         ]);
 
-
         if (DB::getDriverName() !== 'sqlite') {
             $this->error('Optimization is only available for SQLite databases.');
 
@@ -45,7 +45,7 @@ final class DbOptimizeCommand extends Command
         table([
             'Setting',
             'Value',
-            'Via'
+            'Via',
         ], [
             ['PRAGMA auto_vacuum', 'incremental', 'Migration'],
             ['PRAGMA journal_mode', 'WAL', 'Migration'],

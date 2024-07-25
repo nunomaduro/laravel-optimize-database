@@ -34,7 +34,7 @@ final class LaravelOptimizeDatabaseServiceProvider extends ServiceProvider
         }
 
         if (DB::getDriverName() === 'sqlite') {
-            DB::unprepared(<<<SQL
+            DB::unprepared(<<<'SQL'
                 PRAGMA busy_timeout = 5000;
                 PRAGMA cache_size = -20000;
                 PRAGMA foreign_keys = ON;
