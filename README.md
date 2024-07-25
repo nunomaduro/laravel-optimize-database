@@ -10,7 +10,7 @@
 
 ------
 
-> This package is a work-in-progress, and the goal is to keep improving the migration stub: [database/migrations/optimize_database_settings.php.stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub).
+> This package is a work-in-progress, and the goal is to keep improving the migration stub: [database/migrations/optimize_database_settings.php.stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub). At the moment, it only supports SQLite, but I am open to adding support for other database types.
 
 This package publish a migration that will apply good defaults to your SQLite database, making it faster and more production-ready.
 
@@ -35,13 +35,17 @@ php artisan db:optimize
 This will publish a migration that apply defaults like so:
 
 ```SQL
-PRAGMA journal_mode = WAL;
-PRAGMA synchronous = NORMAL;
-PRAGMA page_size = 32768;
-PRAGMA cache_size = -20000;
-PRAGMA auto_vacuum = incremental;
-PRAGMA foreign_keys = ON;
-// etc...
+    public function up(): void
+    {
+        DB::statement('PRAGMA journal_mode = WAL');
+        DB::statement('PRAGMA synchronous = NORMAL');
+        DB::statement('PRAGMA page_size = 32768;');
+        DB::statement('PRAGMA cache_size = -20000;');
+        DB::statement('PRAGMA auto_vacuum = incremental;');
+        DB::statement('PRAGMA foreign_keys = ON;');
+
+        // etc...
+    }
 ```
 
 Next, you simply need to run the migration:
