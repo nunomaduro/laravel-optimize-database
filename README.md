@@ -42,10 +42,10 @@ This will publish a migration that apply defaults like so:
         DB::statement('PRAGMA page_size = 32768;');
         DB::statement('PRAGMA cache_size = -20000;');
         DB::statement('PRAGMA auto_vacuum = incremental;');
+        DB::statement('PRAGMA foreign_keys = ON;');
 
         // etc...
     }
-};
 ```
 
 Next, you simply need to run the migration:
