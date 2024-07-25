@@ -19,7 +19,7 @@ This package publish a migration that will apply good defaults to your SQLite da
 You can install the package via [Composer](https://getcomposer.org):
 
 ```bash
-composer require nunomaduro/laravel-optimize-database
+composer require nunomaduro/laravel-optimize-database --dev
 ```
 
 ## 🙌 Usage
