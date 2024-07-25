@@ -10,13 +10,38 @@
 
 ------
 
-> This package is a work-in-progress, and the goal is to keep improving the migration stub: [database/migrations/optimize_database_settings.php.stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub). At the moment, it only supports SQLite, but I am open to adding support for other database types.
+> This package is a work-in-progress, therefore you should not use it in production - and **always** backup your database before requiring it through Composer.
+> 
+> - [Migration Stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub)
+> - [Runtime Configuration](https://github.com/nunomaduro/laravel-optimize-database/blob/main/src/OptimizeDatabaseServiceProvider.php)
 
-This package publish a migration that will apply good defaults to your SQLite database, making it faster and more production-ready.
+This package provides a simple way to optimize your SQLite database in Laravel; it's a good starting point for production-ready SQLite databases. At the time of this writing,
+it applies the following settings:
 
-> **Requires [PHP 8.2+](https://php.net/releases), [SQLite 3.46+](https://www.sqlite.org/changes.html) and [Laravel 11.0+](https://laravel.com)**
+```
+ ┌───────────────────────────┬─────────────┬───────────┐
+ │ Setting                   │ Value       │ Via       │
+ ├───────────────────────────┼─────────────┼───────────┤
+ │ PRAGMA auto_vacuum        │ incremental │ Migration │
+ │ PRAGMA journal_mode       │ WAL         │ Migration │
+ │ PRAGMA page_size          │ 32768       │ Migration │
+ │ PRAGMA busy_timeout       │ 5000        │ Runtime   │
+ │ PRAGMA cache_size         │ -20000      │ Runtime   │
+ │ PRAGMA foreign_keys       │ ON          │ Runtime   │
+ │ PRAGMA incremental_vacuum │ (enabled)   │ Runtime   │
+ │ PRAGMA mmap_size          │ 2147483648  │ Runtime   │
+ │ PRAGMA temp_store         │ MEMORY      │ Runtime   │
+ │ PRAGMA synchronous        │ NORMAL      │ Runtime   │
+ └───────────────────────────┴─────────────┴───────────┘
+ ```
+
+The settings are applied in two ways:
+- [Migration] - Applied via migration.
+- [Runtime] - Applied at runtime, via service provider.
 
 ## 🚀 Installation
+
+> **Requires [PHP 8.2+](https://php.net/releases), [SQLite 3.46+](https://www.sqlite.org/changes.html) and [Laravel 11.0+](https://laravel.com)**
 
 You can install the package via [Composer](https://getcomposer.org):
 
@@ -26,29 +51,13 @@ composer require nunomaduro/laravel-optimize-database --dev
 
 ## 🙌 Usage
 
-To optimize your SQLite database, you need to run the migration that this package provides:
+To get starter optimizing your SQLite database, you need to run the following command:
 
 ```bash
 php artisan db:optimize
 ```
 
-This will publish a migration that apply defaults like so:
-
-```SQL
-    public function up(): void
-    {
-        DB::statement('PRAGMA journal_mode = WAL');
-        DB::statement('PRAGMA synchronous = NORMAL');
-        DB::statement('PRAGMA page_size = 32768;');
-        DB::statement('PRAGMA cache_size = -20000;');
-        DB::statement('PRAGMA auto_vacuum = incremental;');
-        DB::statement('PRAGMA foreign_keys = ON;');
-
-        // etc...
-    }
-```
-
-Next, you simply need to run the migration:
+At this point, the [Runtime] settings are applied automatically. However, you need to run the migration to apply the [Migration] settings:
 
 ```bash
 php artisan migrate
