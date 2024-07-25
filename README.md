@@ -10,10 +10,7 @@
 
 ------
 
-> This package is a work-in-progress, therefore you should not use it in production - and **always** backup your database before requiring it through Composer.
-> 
-> - [Migration Stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub)
-> - [Runtime Configuration](https://github.com/nunomaduro/laravel-optimize-database/blob/main/src/OptimizeDatabaseServiceProvider.php)
+> This package is a **work-in-progress**, therefore you should not use it in production - and **always** backup your database before requiring it through Composer.
 
 This package provides a simple way to optimize your SQLite database in Laravel; it's a good starting point for production-ready SQLite databases. At the time of this writing,
 it applies the following settings:
@@ -36,8 +33,8 @@ it applies the following settings:
  ```
 
 The settings are applied in two ways:
-- [Migration] - Applied via migration.
-- [Runtime] - Applied at runtime, via service provider.
+- **[Migration Stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub)** - Applied via migration.
+- **[Runtime Configuration](https://github.com/nunomaduro/laravel-optimize-database/blob/main/src/OptimizeDatabaseServiceProvider.php)** - Applied at runtime, via service provider.
 
 ## 🚀 Installation
 
@@ -51,7 +48,7 @@ composer require nunomaduro/laravel-optimize-database --dev
 
 ## 🙌 Usage
 
-To get starter optimizing your SQLite database, you need to run the following command:
+To get started optimizing your SQLite database, you need to run the following command:
 
 ```bash
 php artisan db:optimize
