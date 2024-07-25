@@ -1,7 +1,7 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/nunomaduro/laravel-optimize-database/master/docs/logo.png" height="300" alt="Skeleton Php">
+    <img src="https://raw.githubusercontent.com/nunomaduro/laravel-optimize-database/main/docs/logo.png" height="300" alt="Skeleton Php">
     <p align="center">
-        <a href="https://github.com/nunomaduro/laravel-optimize-database/actions"><img alt="GitHub Workflow Status (master)" src="https://github.com/nunomaduro/laravel-optimize-database/actions/workflows/tests.yml/badge.svg"></a>
+        <a href="https://github.com/nunomaduro/laravel-optimize-database/actions"><img alt="GitHub Workflow Status (main)" src="https://github.com/nunomaduro/laravel-optimize-database/actions/workflows/tests.yml/badge.svg"></a>
         <a href="https://packagist.org/packages/nunomaduro/laravel-optimize-database"><img alt="Total Downloads" src="https://img.shields.io/packagist/dt/nunomaduro/laravel-optimize-database"></a>
         <a href="https://packagist.org/packages/nunomaduro/laravel-optimize-database"><img alt="Latest Version" src="https://img.shields.io/packagist/v/nunomaduro/laravel-optimize-database"></a>
         <a href="https://packagist.org/packages/nunomaduro/laravel-optimize-database"><img alt="License" src="https://img.shields.io/packagist/l/nunomaduro/laravel-optimize-database"></a>
