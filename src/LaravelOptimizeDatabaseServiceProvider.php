@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NunoMaduro\LaravelOptimizeDatabase;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use NunoMaduro\LaravelOptimizeDatabase\Commands\DbOptimizeCommand;
 
@@ -30,6 +31,19 @@ final class LaravelOptimizeDatabaseServiceProvider extends ServiceProvider
             $this->commands([
                 DbOptimizeCommand::class,
             ]);
+        }
+
+        if (DB::getDriverName() === 'sqlite') {
+            DB::unprepared(<<<SQL
+                PRAGMA busy_timeout = 5000;
+                PRAGMA cache_size = -20000;
+                PRAGMA foreign_keys = ON;
+                PRAGMA incremental_vacuum;
+                PRAGMA mmap_size = 2147483648;
+                PRAGMA temp_store = MEMORY;
+                PRAGMA synchronous = NORMAL;
+                SQL,
+            );
         }
     }
 
