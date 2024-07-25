@@ -10,6 +10,8 @@
 
 ------
 
+> This package is a work-in-progress, and the goal is to keep improving the migration stub: [database/migrations/optimize_database_settings.php.stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub).
+
 This package publish a migration that will apply good defaults to your SQLite database, making it faster and more production-ready.
 
 > **Requires [PHP 8.2+](https://php.net/releases), [SQLite 3.46+](https://www.sqlite.org/changes.html) and [Laravel 11.0+](https://laravel.com)**
