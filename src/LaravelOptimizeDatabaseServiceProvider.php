@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace NunoMaduro\LaravelOptimizeDatabase;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use NunoMaduro\LaravelOptimizeDatabase\Commands\DbOptimizeCommand;
@@ -34,7 +35,8 @@ final class LaravelOptimizeDatabaseServiceProvider extends ServiceProvider
         }
 
         if (DB::getDriverName() === 'sqlite') {
-            DB::unprepared(<<<'SQL'
+            try {
+                DB::unprepared(<<<'SQL'
                 PRAGMA busy_timeout = 5000;
                 PRAGMA cache_size = -20000;
                 PRAGMA foreign_keys = ON;
@@ -43,7 +45,10 @@ final class LaravelOptimizeDatabaseServiceProvider extends ServiceProvider
                 PRAGMA temp_store = MEMORY;
                 PRAGMA synchronous = NORMAL;
                 SQL,
-            );
+                );
+            } catch (QueryException $e) {
+                throw_unless(str_contains($e->getMessage(), 'does not exist.'), $e);
+            }
         }
     }
 
