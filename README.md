@@ -34,7 +34,7 @@ it applies the following settings:
 
 The settings are applied in two ways:
 - **[Migration Stub](https://github.com/nunomaduro/laravel-optimize-database/blob/main/database/migrations/optimize_database_settings.php.stub)** - Applied via migration.
-- **[Runtime Configuration](https://github.com/nunomaduro/laravel-optimize-database/blob/main/src/OptimizeDatabaseServiceProvider.php)** - Applied at runtime, via service provider.
+- **[Runtime Configuration](https://github.com/nunomaduro/laravel-optimize-database/blob/main/src/LaravelOptimizeDatabaseServiceProvider.php)** - Applied at runtime, via service provider.
 
 ## 🚀 Installation
 
