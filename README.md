@@ -43,7 +43,7 @@ The settings are applied in two ways:
 You can install the package via [Composer](https://getcomposer.org):
 
 ```bash
-composer require nunomaduro/laravel-optimize-database --dev
+composer require nunomaduro/laravel-optimize-database
 ```
 
 ## 🙌 Usage
